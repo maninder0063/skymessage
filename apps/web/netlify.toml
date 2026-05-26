@@ -1,0 +1,14 @@
+# Netlify config for the SkyMessage web app.
+# CLI was linked from apps/web — paths are relative to apps/web.
+# pnpm is assumed to be globally installed already (npm i -g pnpm).
+
+[build]
+  command = "cd ../.. && pnpm install --frozen-lockfile=false && pnpm --filter @skymessage/types build && pnpm --filter @skymessage/shared build && cd apps/web && pnpm exec next build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "20.18.0"
+  NEXT_TELEMETRY_DISABLED = "1"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"

@@ -1,0 +1,9 @@
+node_modules
+dist
+build
+.next
+out
+release
+coverage
+*.generated.ts
+pnpm-lock.yaml

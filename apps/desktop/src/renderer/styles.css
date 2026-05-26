@@ -1,0 +1,83 @@
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Login window — overrides the overlay defaults so the form is interactive. */
+body:has(input),
+body:has(button) {
+  background: linear-gradient(180deg, #F6F7FB 0%, #E8ECF7 100%);
+  pointer-events: auto;
+  user-select: auto;
+  -webkit-user-select: auto;
+  overflow: auto;
+}
+body:has(input) #root,
+body:has(button) #root {
+  pointer-events: auto;
+}
+
+body {
+  font-family: 'Roboto', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* { box-sizing: border-box; }
+
+/* =========================================================================
+   ANIMATION LAYER — looped sub-animations are CSS keyframes so they run on
+   the compositor thread (off the JS/React thread). The master horizontal
+   sweep is driven by Web Animations API in Overlay.tsx — same pipeline.
+   ========================================================================= */
+
+/* Subtle flutter for the cloth banner's ragged left edge (decorative). */
+@keyframes clothFlutter {
+  0%, 100% { transform: translateX(0) scaleY(1); }
+  50%      { transform: translateX(-2px) scaleY(1.015); }
+}
+
+.cloth-flutter {
+  transform-origin: right center;
+  animation: clothFlutter 1.4s ease-in-out infinite;
+}
+
+/* -------------------------------------------------------------------------
+   BANNER AIR — "wind touching the cloth"
+   Asymmetric rotation pivoted at the rope-attachment edge (right edge,
+   middle). Amplitude only +/- 0.7deg so the ropes don't visually detach
+   from the plane. The LEFT edge (ragged tatters) catches the most air —
+   exactly where you'd expect.
+   ------------------------------------------------------------------------- */
+@keyframes bannerAir {
+  0%   { transform: rotate(-0.25deg); }
+  22%  { transform: rotate( 0.55deg); }
+  46%  { transform: rotate( 0.70deg); }
+  64%  { transform: rotate( 0.20deg); }
+  82%  { transform: rotate(-0.40deg); }
+  100% { transform: rotate(-0.25deg); }
+}
+
+.banner-air {
+  animation: bannerAir 5.4s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  transform-origin: 100% 50%;
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* Banner title truncation — single-line ellipsis past the safe-zone width. */
+.banner-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 310px;
+}
