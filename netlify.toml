@@ -1,13 +1,16 @@
-# Netlify config for the SkyMessage web app.
-# CLI was linked from apps/web — paths are relative to apps/web.
-# pnpm is assumed to be globally installed already (npm i -g pnpm).
+# Netlify config — read from the repo root when deployed from GitHub.
+# base = apps/web means commands run from apps/web; publish is relative to it.
+# We cd to the repo root for pnpm install so workspace packages are linked,
+# then return to apps/web for the actual Next.js build.
 
 [build]
+  base = "apps/web"
   command = "cd ../.. && pnpm install --frozen-lockfile=false && pnpm --filter @skymessage/types build && pnpm --filter @skymessage/shared build && cd apps/web && pnpm exec next build"
   publish = ".next"
 
 [build.environment]
   NODE_VERSION = "20.18.0"
+  PNPM_VERSION = "9.12.0"
   NEXT_TELEMETRY_DISABLED = "1"
 
 [[plugins]]
