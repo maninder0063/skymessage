@@ -67,14 +67,38 @@ export default async function AccountPage() {
           <Typography color="text.secondary" sx={{ mb: 2 }}>
             Send this to anyone — they can banner you a message without signing up.
           </Typography>
-          <Stack direction="row" spacing={1.5}>
+          <Stack direction="row" spacing={1.5} flexWrap="wrap" useFlexGap>
             <Button component={Link} href={`/${profile.handle}`} variant="contained">
               View my profile
+            </Button>
+            <Button component={Link} href={`/print/${profile.handle}`} target="_blank" variant="outlined">
+              Print QR for my desk
             </Button>
             <Button component={Link} href="/download" variant="outlined">
               Get the desktop app
             </Button>
           </Stack>
+        </Paper>
+
+        <Paper sx={{ p: 3, borderRadius: 3 }}>
+          <Typography variant="overline" color="primary" sx={{ fontWeight: 700, letterSpacing: 1 }}>
+            Stick this on your desk
+          </Typography>
+          <Typography sx={{ fontSize: 18, fontWeight: 600, my: 1 }}>
+            Print a QR code anyone can scan to send you a banner.
+          </Typography>
+          <Typography color="text.secondary" sx={{ mb: 2 }}>
+            Opens a print-ready page with your QR, handle, and send link. Hit Ctrl+P to print —
+            also great as a screen wallpaper or Slack profile pic.
+          </Typography>
+          <Button
+            component={Link}
+            href={`/print/${profile.handle}`}
+            target="_blank"
+            variant="contained"
+          >
+            Open my QR page
+          </Button>
         </Paper>
 
         <Paper sx={{ p: 3, borderRadius: 3 }}>

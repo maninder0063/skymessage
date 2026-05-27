@@ -1,0 +1,183 @@
+/* =========================================================================
+   Print-QR page styles. Designed for both screen preview and paper output.
+   ========================================================================= */
+
+.qr-print-root {
+  min-height: 100vh;
+  background: #f6f7fb;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 16px;
+  font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Top toolbar — visible only on screen, hidden in print */
+.qr-toolbar {
+  width: 100%;
+  max-width: 520px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.qr-back {
+  color: #475569;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.qr-back:hover { color: #0f172a; }
+
+.qr-btn {
+  background: #3D5AFE;
+  color: #ffffff;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  font-family: inherit;
+}
+.qr-btn:hover { background: #2940d8; }
+.qr-btn-big {
+  padding: 14px 32px;
+  font-size: 16px;
+}
+
+/* The card that gets printed */
+.qr-card {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 40px 32px 32px;
+  width: 100%;
+  max-width: 520px;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  page-break-inside: avoid;
+}
+
+.qr-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 24px;
+  color: #475569;
+}
+
+.qr-brand {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.qr-qr {
+  width: 100%;
+  max-width: 360px;
+  aspect-ratio: 1;
+  margin-bottom: 24px;
+  background: #ffffff;
+  padding: 12px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.qr-qr svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.qr-handle {
+  font-size: 44px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #0f172a;
+  margin: 0 0 8px;
+}
+
+.qr-tagline {
+  font-size: 17px;
+  color: #475569;
+  margin: 0 0 20px;
+  font-weight: 500;
+}
+
+.qr-footer {
+  border-top: 1px solid rgba(15, 23, 42, 0.08);
+  padding-top: 16px;
+  margin-top: 4px;
+  width: 100%;
+}
+
+.qr-url {
+  font-size: 13px;
+  color: #5C6A82;
+  letter-spacing: 0.2px;
+  font-family: 'JetBrains Mono', 'Consolas', ui-monospace, monospace;
+}
+
+/* Bottom bar — secondary big print button */
+.qr-bottom-bar {
+  margin-top: 24px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.qr-hint {
+  font-size: 13px;
+  color: #64748B;
+}
+
+/* =========================================================================
+   PRINT — hide everything chrome, center the card, full size QR.
+   ========================================================================= */
+@media print {
+  @page {
+    size: auto;
+    margin: 14mm;
+  }
+
+  body {
+    background: #ffffff !important;
+  }
+
+  .qr-print-root {
+    background: #ffffff;
+    padding: 0;
+    display: block;
+  }
+
+  .qr-toolbar,
+  .qr-bottom-bar,
+  .qr-back,
+  .qr-btn,
+  noscript {
+    display: none !important;
+  }
+
+  .qr-card {
+    box-shadow: none;
+    border: none;
+    padding: 24px 16px;
+    max-width: none;
+    width: 100%;
+  }
+
+  .qr-qr {
+    max-width: 480px;
+  }
+
+  .qr-handle { font-size: 52px; }
+  .qr-tagline { font-size: 18px; }
+}
